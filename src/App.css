@@ -1,38 +1,136 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  overflow-x: hidden;
+  padding-right: 0;
+  padding-left: 0;
+  background: #EEF5FA;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.all_holder {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.column_left {
   display: flex;
   flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.first_window {
+  width: 639px;
+  height: 698px;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.window_photo {
+  width: 315px;
+  height: 468px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.secend_window {
+  margin-top: 50px;
+  width: 639px;
+  height: 389px;
+  background-color: #fff;
+  border: 1px solid black;
+  border-radius: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .column_left {
+      width: 100%;
   }
-  to {
-    transform: rotate(360deg);
+  .first_window,
+  .secend_window {
+      width: 100%;
+      border-radius: 0;
+      border: none;
+  }
+}
+
+.blind {
+  width: 572px;
+  height: 52px;
+  border: 1px solid #F6F6F6;
+  background-color: #F6F6F6;
+  border-radius: 25px;
+  vertical-align: text-top;
+  margin-top: 22px;
+}
+
+.blind>h2 {
+  padding-left: 25px;
+  position: relative;
+  top: -15%;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.price_section {
+  width: 100%;
+}
+
+.price {
+  display: flex;
+  color: black;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-right: 35px;
+  padding-top: -25px;
+  vertical-align: baseline;
+}
+
+.price>p {
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.1px;
+  color: #3B3E51;
+}
+
+@media screen and (max-width: 800px) {
+  .blind_secion {
+      width: 100%;
+  }
+  .blind {
+      width: 400px;
+  }
+  .price {
+      padding-right: 44px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .blind {
+      width: 100%;
+  }
+  .price {
+      width: 100%;
+  }
+  .window_photo {
+      width: 102%;
   }
 }
