@@ -1,0 +1,100 @@
+.fabricSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.centerDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.fabricSection > h2 {
+  margin-left: 54px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+.fabricHr {
+  width: 573px;
+  margin-top: -10px;
+  border-top: 1px solid #707070;
+}
+.chooseFabric {
+  margin-top: 10px;
+  margin-left: 50px;
+  width: 573px;
+  height: 100px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.point {
+  background-color: #ffffff;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #3b3e51;
+  margin-left: 78px;
+  margin-top: -6px;
+  position: absolute;
+}
+.fabric {
+  width: 78px;
+  height: 75px;
+  border-radius: 25px;
+  border: 1px solid black;
+  background-color: aqua;
+}
+.fabricColor {
+  width: 78px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+.fabricColor > p {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  margin-top: 5px;
+  color: #3b3e51;
+}
+@media (max-width: 1900px) {
+  .fabricHr {
+    width: 100%;
+  }
+  .fabricSection > h2 {
+    margin-left: 0;
+  }
+  .chooseFabric {
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+@media (max-width: 500px) {
+  .chooseFabric {
+    width: 50%;
+    justify-content: space-around;
+  }
+  .centerDiv {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (max-width: 400px) {
+  .chooseFabric {
+    width: 75%;
+    justify-content: space-around;
+  }
+}
