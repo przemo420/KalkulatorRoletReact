@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .asembleySection {
   width: 100%;
   display: flex;
@@ -91,3 +92,98 @@
     font-size: 14px;
   }
 }
+=======
+.asembleySection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.asemblayHr {
+  width: 573px;
+  margin-top: -10px;
+  border-top: 1px solid #707070;
+}
+.asembleySection > h2 {
+  margin-left: 54px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+.chooseCover {
+  margin-top: 25px;
+  width: 350px;
+  height: 200px;
+  margin-left: 56px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.cover {
+  width: 69px;
+  height: 92px;
+}
+.pointer {
+  background-color: #ffffff;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #3b3e51;
+  position: absolute;
+  margin-left: -10px;
+  margin-top: -5px;
+  outline: none;
+}
+.pointer:active, .pointerActive:active{
+  outline: none;
+}
+.pointerActive {
+  background-color: #ff0000;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #3b3e51;
+  position: absolute;
+  margin-left: -10px;
+  margin-top: -5px;
+  outline: none;
+}
+.coverText {
+  width: 69px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.coverText > p {
+  color: #3b3e51;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+@media (max-width: 1900px) {
+  .asembleySection > h2 {
+    margin-left: 15px;
+  }
+  .asemblayHr {
+    width: 100%;
+  }
+}
+@media (max-width: 500px) {
+  .chooseCover {
+    padding-top: 27px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 0;
+    margin-left: 0;
+    height: auto;
+  }
+  .coverText > p {
+    font-size: 14px;
+  }
+}
+>>>>>>> 389fe81... add hooks improve css

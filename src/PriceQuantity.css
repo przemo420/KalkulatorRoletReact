@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .priceSection {
   margin-top: 20px;
   width: 100%;
@@ -124,3 +125,131 @@ a {
     height: auto;
   }
 }
+=======
+.priceSection {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.priceSection > h2 {
+  margin-left: 54px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+.PriceQuantityHr {
+  width: 573px;
+  margin-top: -10px;
+  border-top: 1px solid #707070;
+}
+.PriceShow {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.priceAll,
+.priceAll1 {
+  display: flex;
+  padding-right: 60px;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.priceAll {
+  margin-top: -35px;
+}
+.priceAll1 > h4,
+.priceAll > h4 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.2px;
+  color: #3b3e51;
+}
+.priceAll1 > h3 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.2px;
+  font-weight: bold;
+  color: #3b3e51;
+}
+.priceAll > h3 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.2px;
+  font-weight: bold;
+  color: #0089ed;
+}
+.buttonPrice {
+  margin-top: -72px;
+  margin-left: 58px;
+  width: 573px;
+  height: 175px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.buttonPrice > button {
+  width: 284px;
+  height: 54px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #3b3e51;
+  border-radius: 25px;
+  outline: none;
+}
+a > h1 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.1px;
+  color: #3b3e51;
+}
+a {
+  text-decoration: none;
+}
+.buttonColor > h1 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.1px;
+}
+.buttonColor {
+  background-color: #62d97d;
+  color: #ffff;
+  outline: none;
+}
+.buttonColor:hover {
+  background-color: #ffff;
+  color: #62d97d !important;
+  border-color: #62d97d !important;
+  outline: none;
+}
+.buttonColor:active {
+  outline: none;
+}
+@media (max-width: 1900px) {
+  .PriceQuantityHr {
+    width: 100%;
+  }
+  .priceSection > h2 {
+    margin-left: 0;
+  }
+  .priceAll,
+  .priceAll1 {
+    padding-right: 20px;
+  }
+  .buttonPrice {
+    margin-left: 0;
+    margin-top: 15px;
+    justify-content: space-around;
+    width: 100%;
+    height: auto;
+  }
+}
+>>>>>>> 389fe81... add hooks improve css

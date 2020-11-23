@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .emailSection {
   margin-top: 10px;
   width: 100%;
@@ -194,3 +195,201 @@ label > p {
     border-radius: 0;
   }
 }
+=======
+.emailSection {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.emailSection > h2 {
+  margin-left: 54px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 6px;
+}
+.emailHr {
+  width: 573px;
+  margin-top: -10px;
+  border-top: 1px solid #707070;
+}
+.emailForm {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 573px;
+  height: 500px;
+}
+.takeForm {
+  width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+.inputForms {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+}
+.inputEmail {
+  margin-top: 5px;
+  padding-left: 16px;
+  width: 270px;
+  height: 54px;
+  border-radius: 25px;
+  border: 1px solid #f6f6f6;
+  outline: none;
+  background-color: #f6f6f6;
+}
+.inputEmail:hover{
+  border-color: black;
+  background-color: #ffffff;
+  color:black;
+}
+.inputEmail:focus{
+  border-color: black;
+  background-color: #ffffff;
+  color:black;
+}
+.checkboxForms {
+  display: flex;
+  width: 573px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+label {
+  margin-top: 25px;
+  display: flex;
+  width: 573px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
+label > p {
+  margin-top: 2px;
+  margin-left: 5px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+}
+.sendEmail {
+  width: 100%;
+  height: 54px;
+  background-color: #f6f6f6;
+  border-radius: 25px;
+  border: 1px solid #f6f6f6;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  outline:none;
+  margin-top: 30px;
+}
+.sendEmail:hover{
+  background-color: #62d97d ;
+  border-color: black;
+}
+.sendEmail > h1 {
+  color: black;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 26px;
+  font-weight: bolder;
+}
+.emailPlain {
+  background-image: url("./paper-plane.svg");
+  width: 24px;
+  margin-left: 7px;
+  height: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+@media (max-width: 1900px) {
+  .takeForm {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .emailHr {
+    width: 100%;
+  }
+  .emailSection > h2 {
+    margin-left: 0;
+  }
+  .emailForm {
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    margin-left: 0;
+  }
+  .inputEmail {
+    margin-left: 25px;
+    width: 350px;
+  }
+  .checkboxForms {
+    margin-top: 25px;
+    width: 100%;
+    margin-left: 56px;
+  }
+  label > p {
+    margin-top: 2px;
+  }
+  label {
+    margin-top: 2px;
+    width: 100%;
+
+    margin-left: 0;
+  }
+  .sendEmail {
+    width: 374px;
+    height: 54px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    margin-left: -80px;
+  }
+  .sendEmail > h1 {
+    font-size: 19px;
+  }
+}
+@media (max-width: 500px) {
+  .inputForms {
+    width: 100%;
+  }
+  .inputEmail {
+    margin-left: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  .emailForm {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+  }
+  .checkboxForms {
+    width: 100%;
+    margin-left: 0;
+    flex-wrap: wrap;
+  }
+  .sendEmail {
+    width: 100%;
+    align-items: center;
+    height: 60px;
+    margin-left: 0;
+    border-radius: 0;
+  }
+}
+>>>>>>> 389fe81... add hooks improve css
