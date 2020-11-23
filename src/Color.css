@@ -34,6 +34,21 @@
   border: 1px solid #3b3e51;
   margin-left: 56px;
   margin-top: -6px;
+  outline: none;
+}
+.point:active, .pointActive:active{
+  outline: none;
+}
+.pointActive{
+  background-color: #ff0000;
+  width: 15px;
+height: 15px;
+border-radius: 50%;
+border: 1px solid #3b3e51;
+margin-left: 56px;
+margin-top: -6px;
+position:absolute;
+outline: none;
 }
 .color {
   width: 78px;
@@ -78,7 +93,7 @@
   }
 }
 @media (max-width: 500px) {
-  .chooseColor{
+  .chooseColor {
     width: 50%;
     justify-content: space-around;
   }
@@ -92,9 +107,8 @@
   }
 }
 @media (max-width: 400px) {
-  .chooseColor{
+  .chooseColor {
     width: 75%;
     justify-content: space-around;
   }
 }
-

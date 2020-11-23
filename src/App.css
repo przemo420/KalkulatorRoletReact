@@ -29,12 +29,13 @@ body {
   margin-left: 245px;
   background: #eef5fa;
   height: 2000px;
+  clear:both;
+  overflow: hidden;
 }
 .right_column {
   display: flex;
   margin-top: 88px;
   flex-direction: column;
-  margin-top: 88px;
   width: 687px;
   margin-right: 245px;
   background-color: #ffffff;

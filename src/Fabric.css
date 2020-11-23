@@ -22,6 +22,30 @@
   margin-top: -10px;
   border-top: 1px solid #707070;
 }
+.point {
+  background-color: #ffffff;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #3b3e51;
+  margin-left: 56px;
+  margin-top: -6px;
+  outline: none;
+}
+.point:active, .pointActive:active{
+  outline: none;
+}
+.pointActive{
+  background-color: #ff0000;
+  width: 15px;
+height: 15px;
+border-radius: 50%;
+border: 1px solid #3b3e51;
+margin-left: 56px;
+margin-top: -6px;
+position:absolute;
+outline: none;
+}
 .chooseFabric {
   margin-top: 10px;
   margin-left: 50px;

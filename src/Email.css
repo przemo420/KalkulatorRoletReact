@@ -33,6 +33,7 @@
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  justify-content: space-between;
   flex-wrap: nowrap;
 }
 .inputForms {
@@ -50,7 +51,18 @@
   height: 54px;
   border-radius: 25px;
   border: 1px solid #f6f6f6;
+  outline: none;
   background-color: #f6f6f6;
+}
+.inputEmail:hover{
+  border-color: black;
+  background-color: #ffffff;
+  color:black;
+}
+.inputEmail:focus{
+  border-color: black;
+  background-color: #ffffff;
+  color:black;
 }
 .checkboxForms {
   display: flex;
@@ -84,7 +96,12 @@ label > p {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  outline:none;
   margin-top: 30px;
+}
+.sendEmail:hover{
+  background-color: #62d97d ;
+  border-color: black;
 }
 .sendEmail > h1 {
   color: black;

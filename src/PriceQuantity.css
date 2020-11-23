@@ -73,20 +73,37 @@
   align-items: center;
   border: 1px solid #3b3e51;
   border-radius: 25px;
+  outline: none;
 }
-button > h1 {
+a > h1 {
   font-family: "Noto Sans JP", sans-serif;
   font-size: 14px;
   font-weight: normal;
   letter-spacing: 0.1px;
   color: #3b3e51;
 }
-.buttonColor {
-  background-color: #62d97d;
-  color: #ffff !important;
+a {
+  text-decoration: none;
 }
 .buttonColor > h1 {
-  color: #ffff !important;
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  font-weight: normal;
+  letter-spacing: 0.1px;
+}
+.buttonColor {
+  background-color: #62d97d;
+  color: #ffff;
+  outline: none;
+}
+.buttonColor:hover {
+  background-color: #ffff;
+  color: #62d97d !important;
+  border-color: #62d97d !important;
+  outline: none;
+}
+.buttonColor:active {
+  outline: none;
 }
 @media (max-width: 1900px) {
   .PriceQuantityHr {

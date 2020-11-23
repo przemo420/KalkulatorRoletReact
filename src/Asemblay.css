@@ -40,6 +40,21 @@
   position: absolute;
   margin-left: -10px;
   margin-top: -5px;
+  outline: none;
+}
+.pointer:active, .pointerActive:active{
+  outline: none;
+}
+.pointerActive {
+  background-color: #ff0000;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #3b3e51;
+  position: absolute;
+  margin-left: -10px;
+  margin-top: -5px;
+  outline: none;
 }
 .coverText {
   width: 69px;
