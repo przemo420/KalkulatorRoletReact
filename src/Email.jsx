@@ -4,7 +4,19 @@ import React from "react";
   href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap"
   rel="stylesheet"
 />;
-class Email extends React.Component {
+export default class Email extends React.Component {
+  state = {
+    loading: false
+  };
+
+  fetchData = () => {
+    this.setState({ loading: true });
+
+    //Faking API call here
+    setTimeout(() => {
+      this.setState({ loading: false });
+    }, 2000);
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -48,7 +60,9 @@ class Email extends React.Component {
     );
   }
   render() {
+    const { loading } = this.state;
     return (
+     
       <>
         <div className="emailSection">
           <h2>Wyślij ofertę</h2>
@@ -113,9 +127,14 @@ class Email extends React.Component {
                 <p>Wyślij kopie zamówienia do mnie na maila</p>
               </label>
             </div>
-            <button className="sendEmail" type="submit">
-              <h1>WYŚLIJ</h1>
-              <div className="emailPlain"></div>
+            <button className="sendEmail" type="submit" onClick={this.fetchData} disabled={loading}>
+            {loading && (
+            <i
+              className="fa fa-refresh fa-spin"
+              style={{ marginRight: "20px",fontSize:"24px",color:"black" }}
+            />
+          )}
+             {loading}<h1>WYŚLIJ</h1> <div className="emailPlain"></div>
             </button>
           </form>
         </div>
@@ -124,4 +143,3 @@ class Email extends React.Component {
   }
 }
 
-export default Email;
