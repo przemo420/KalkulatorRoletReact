@@ -45,7 +45,7 @@ export default function Color({ setSelectedMode }) {
               <p>RAL9016 BIEL</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color2">
+              <div className="color" id="color2">
                 <button
                   onClick={() => {
                     onButtonClick(Ral);
@@ -59,7 +59,7 @@ export default function Color({ setSelectedMode }) {
               <p>RAL8028 ANCTRATYT PÓŁMAT</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color3">
+              <div className="color" id="color3">
                 <button
                   onClick={() => {
                     onButtonClick(Braz);
@@ -73,7 +73,7 @@ export default function Color({ setSelectedMode }) {
               <p>RAL8028 BRĄZ</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color4">
+              <div className="color" id="color4">
                 <button
                   onClick={() => {
                     onButtonClick(Krem);
@@ -87,7 +87,7 @@ export default function Color({ setSelectedMode }) {
               <p>RAL1014 KREM PÓŁMAT</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color5">
+              <div className="color" id="color5">
                 <button
                   onClick={() => {
                     onButtonClick(Antracyt);
@@ -101,7 +101,7 @@ export default function Color({ setSelectedMode }) {
               <p>Kolor1</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color6">
+              <div className="color" id="color6">
                 <button
                   onClick={() => {
                     onButtonClick(Mahon);
@@ -115,7 +115,7 @@ export default function Color({ setSelectedMode }) {
               <p>ANTRACYT</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color7">
+              <div className="color" id="color7">
                 <button
                   onClick={() => {
                     onButtonClick(Sosna);
@@ -129,7 +129,7 @@ export default function Color({ setSelectedMode }) {
               <p>SOSNA GÓRSKA</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color8">
+              <div className="color" id="color8">
                 <button
                   onClick={() => {
                     onButtonClick(Orzech);
@@ -143,7 +143,7 @@ export default function Color({ setSelectedMode }) {
               <p>ORZECH</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color9">
+              <div className="color" id="color9">
                 <button
                   onClick={() => {
                     onButtonClick(Winchester);
@@ -157,7 +157,7 @@ export default function Color({ setSelectedMode }) {
               <p>WINCHESTER</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color10">
+              <div className="color" id="color10">
                 <button
                   onClick={() => {
                     onButtonClick(ZlotyDab);
@@ -171,7 +171,7 @@ export default function Color({ setSelectedMode }) {
               <p>ZŁOTY DĄB</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color11">
+              <div className="color" id="color11">
                 <button
                   onClick={() => {
                     onButtonClick(ZlotyDabRal);
@@ -185,7 +185,7 @@ export default function Color({ setSelectedMode }) {
               <p>RAL8003 ZŁOTY DĄB</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color12">
+              <div className="color" id="color12">
                 <button
                   onClick={() => {
                     onButtonClick(SrebnyRal);
@@ -199,7 +199,7 @@ export default function Color({ setSelectedMode }) {
               <p>RAL9006 SREBNY PÓŁMAT</p>
             </div>
             <div className="systemColor">
-              <div className="fabric" id="color13">
+              <div className="color" id="color13">
                 <button
                   onClick={() => {
                     onButtonClick(DabB);
