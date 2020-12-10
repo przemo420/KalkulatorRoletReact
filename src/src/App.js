@@ -7,12 +7,6 @@ import { getAllUsers, createUser } from './services/UserService'
 
 class App extends Component {
 
-  state = {
-    user: {},
-    users: [],
-    numberOfUsers: 0
-  }
-
   createUser = (e) => {
       createUser(this.state.user)
         .then(response => {
@@ -29,26 +23,13 @@ class App extends Component {
       });
   }
 
-  onChangeForm = (e) => {
-      let user = this.state.user
-      if (e.target.name === 'firstname') {
-          user.firstName = e.target.value;
-      } else if (e.target.name === 'lastname') {
-          user.lastName = e.target.value;
-      } else if (e.target.name === 'email') {
-          user.email = e.target.value;
-      }
-      this.setState({user})
-  }
-
   render() {
-    
     return (
-      <div class="row App">
-          <article class="col-md-6">
+      <div className="row App">
+          <article className="col-md-6">
             <Preview></Preview>
           </article>
-          <article class="col-md-6">
+          <article className="col-md-6">
             <Blind></Blind>
           </article>
       </div>
