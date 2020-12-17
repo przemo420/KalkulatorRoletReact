@@ -3,16 +3,16 @@ export class Installation extends React.Component {
     constructor(props) {
         super(props)
         this.handleType = [
-            {'name': 'Montaż bezinwazyjny standard', 'img': require( '../../images/first.jpg' ), 'price': 0},
-            {'name': 'Montaż bezinwazyjny do okien z nawiewnikiem', 'img': require( '../../images/secend.jpg' ), 'price': 0},
-            {'name': 'Montaż inwazyjny', 'img': require( '../../images/third.jpg' ), 'price': 0}
+            {'name': 'Montaż bezinwazyjny standard', 'img': require( '../../images/handle/first.jpg' ), 'price': 0},
+            {'name': 'Montaż bezinwazyjny do okien z nawiewnikiem', 'img': require( '../../images/handle/secend.jpg' ), 'price': 0},
+            {'name': 'Montaż inwazyjny', 'img': require( '../../images/handle/third.jpg' ), 'price': 0}
         ];
 
         this.handleChange = this.handleChange.bind(this)
     }
 
     handleChange(event) {
-        
+
     }
 
     render() {
