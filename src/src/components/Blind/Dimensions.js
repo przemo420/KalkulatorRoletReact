@@ -52,7 +52,7 @@ export class Dimensions extends React.Component {
                 <input type="text" onChange={this.handleChange} name="horizontal" className="form-control is-valid" placeholder="Minimalna szerokość 50cm" value={this.state.horizontal} />
                 <span className="input-group-text">x</span>
                 <input type="text" onChange={this.handleChange} name="vertical" className="form-control is-valid" placeholder="Minimalna wysokość 50cm" value={this.state.vertical}/>
-                <div class="invalid-feedback d-none">
+                <div className="invalid-feedback d-none">
                     Please choose a username.
                 </div>
             </div>
