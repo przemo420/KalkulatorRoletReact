@@ -2,6 +2,10 @@ import React from 'react'
 
 export const Preview = () => {
     return(
-        <p>Zdjęcie</p>
+        <div>
+            <div className="mt-5">
+                <p>Tutaj podgląd zamówienia</p>
+            </div>
+        </div>
     )
 }

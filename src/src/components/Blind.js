@@ -5,6 +5,7 @@ import Dimensions from './Blind/Dimensions'
 import { Installation } from './Blind/Installation'
 import { Material } from './Blind/Material'
 import { Color } from './Blind/Color'
+import { Contact } from './Contact'
 
 import { getStartConfig, createUser } from '../services/UserService'
 
@@ -43,6 +44,7 @@ class Blind extends React.Component {
                 <Installation config={ this.state.startData }></Installation>
                 <Material config={ this.state.startData }></Material>
                 <Color config={ this.state.startData }></Color>
+                <Contact config={ this.state.startData }></Contact>
             </form>
         )
     }

@@ -36,6 +36,7 @@ let config = {
         { 'img': 'zlotydab2', 'price': 0 }
     ],
     'color': [
+        // Pętla niżej
     ]
 };
 
