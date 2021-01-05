@@ -1,8 +1,13 @@
 const express = require('express');
 const path = require('path');
 const app = express(),
-      bodyParser = require("body-parser");
+      bodyParser = require("body-parser"),
+      cors = require('cors'),
       port = 3080;
+
+app.use(cors());
+
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 // place holder for the data
 let config = { 
@@ -46,6 +51,16 @@ for( var i=201; i<=218; i++){
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../src/public')));
+
+app.use('/api', createProxyMiddleware({ 
+    target: 'http://rolety.sztosit.eu/', //original url
+    changeOrigin: true, 
+    //secure: false,
+    onProxyRes: function (proxyRes, req, res) {
+       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
+    }
+}));
+
 
 app.get('/api/start', (req, res) => {
     res.json(config);

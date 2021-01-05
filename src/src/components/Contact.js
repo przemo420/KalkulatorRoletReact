@@ -42,7 +42,14 @@ export class Contact extends React.Component {
                     { item.type === 'checkbox' ? (<label for={ item.id } className="form-label">&nbsp;{ item.name }</label>) : '' }
                 </div>
             )) }
-            <input type="submit" className="btn btn-primary mb-3" value="Wyślij"/>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    
+                </div>
+                <div class="col-12 col-md-6">
+                    <input type="submit" className="btn btn-primary mb-3" value="Wyślij"/>
+                </div>
+            </div>
         </div>
         )
     }

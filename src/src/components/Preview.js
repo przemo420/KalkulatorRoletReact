@@ -5,6 +5,8 @@ export const Preview = () => {
         <div>
             <div className="mt-5">
                 <p>Tutaj podgląd zamówienia</p>
+                <hr></hr>
+                Lista rolet:
             </div>
         </div>
     )
