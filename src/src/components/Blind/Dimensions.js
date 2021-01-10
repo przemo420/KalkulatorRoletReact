@@ -26,8 +26,9 @@ export default class Dimensions extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props.config;
 
-        if( prop.load && previousProps !== this.props ) {
-            console.log( 'componentDidUpdate' );
+        if( this.state.width === 0 ) {
+            console.log( 'componentDidUpdate Dimensions' );
+
             this.setState({ 
                 validate: {
                     width: {
@@ -44,6 +45,8 @@ export default class Dimensions extends React.Component {
                 width: prop.dim.width.min,
                 height: prop.dim.height.min
             });
+
+            this.sendUpdate();
         }
     }
 
@@ -55,12 +58,16 @@ export default class Dimensions extends React.Component {
         if( name === 'width' ) {
             if( isNaN( value ) ) value = this.state.validate.width.min;
 
+            value = Math.ceil( value / 10 ) * 10;
+
             if( value < this.state.validate.width.min ) this.setState({ h: 'in', 'msg': 'Minimalna szerokość to '+ this.state.validate.width.min +'cm' });
             else if( value > this.state.validate.width.max ) this.setState({ h: 'in', 'msg': 'Maksymalna szerokość to '+ this.state.validate.width.max +'cm' });
             else this.setState({ h: '', 'msg': '' });
         } else if( name === 'height' ) {
             if( isNaN( value ) ) value = this.state.validate.height.min;
             
+            value = Math.ceil( value / 10 ) * 10;
+
             if( value < this.state.validate.height.min ) this.setState({ v: 'in', 'msg': 'Minimalna wysokość to '+ this.state.validate.height.min +'cm' });
             else if( value > this.state.validate.height.max ) this.setState({ v: 'in', 'msg': 'Maksymalna wysokość to '+ this.state.validate.height.max +'cm' });
             else this.setState({ v: '', 'msg': '' });
@@ -69,8 +76,22 @@ export default class Dimensions extends React.Component {
         this.setState({
             [name]: value
         });
+
+        this.sendUpdate();
     }
 
+    sendUpdate = () => {
+        let $this = this;
+
+        setTimeout(function(){
+            if( $this.state.msg === '' ) {
+                $this.props.onUpdate( {
+                    'width': $this.state.width,
+                    'height': $this.state.height
+                });
+            }
+        }, 100 );
+    }
     render() {
         return(
         <div className="form-group">

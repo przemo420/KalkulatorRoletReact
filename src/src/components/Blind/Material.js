@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { parseUpdateEventToParent } from './helpers'
 
 export class Material extends React.Component {
     constructor(props) {
@@ -10,15 +11,24 @@ export class Material extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props.config;
 
-        if( prop.load && previousProps !== this.props ) {
-            console.log( 'componentDidUpdate' );
-            this.setState({ handleType: prop.mat });
+        if( this.state.active == null ) {
+            console.log( 'componentDidUpdate Material' );
+            this.setState({ handleType: prop.mat, active: 0 });
+            this.sendUpdate( 0 );
         }
     }
 
     addActiveClass( i ) {
         this.setState({ active: i });
+        this.sendUpdate( i );
     };
+
+    sendUpdate = ( i ) => {
+        parseUpdateEventToParent( this, {
+            'material': i
+        }); 
+    }
+
     render() {
         return(
             <div>

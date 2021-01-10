@@ -1,4 +1,5 @@
 import React from 'react'
+import { parseUpdateEventToParent } from './helpers'
 
 export class Installation extends React.Component {
     constructor(props) {
@@ -11,15 +12,23 @@ export class Installation extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props.config;
 
-        if( prop.load && previousProps !== this.props ) {
-            console.log( 'componentDidUpdate' );
-            this.setState({ handleType: prop.ins });
+        if( this.state.active == null ) {
+            console.log( 'componentDidUpdate Installation' );
+            this.setState({ handleType: prop.ins, active: 0 });
+            this.sendUpdate( 0 );
         }
     }
 
     addActiveClass( i ) {
         this.setState({ active: i });
+        this.sendUpdate( i );
     };
+
+    sendUpdate = ( i ) => {
+        parseUpdateEventToParent( this, {
+            'installation': i
+        });
+    }
     render() {
         return(
             <div>

@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { parseUpdateEventToParent } from './helpers';
 
 export class Color extends React.Component {
     constructor(props) {
@@ -10,19 +11,27 @@ export class Color extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props.config;
 
-        if( prop.load && previousProps !== this.props ) {
-            console.log( 'componentDidUpdate' );
-            this.setState({ handleType: prop.color });
+        if( this.state.active == null ) {
+            console.log( 'componentDidUpdate Color' );
+            this.setState({ handleType: prop.color, active: 0 });
+            this.sendUpdate( 0 );
         }
     }
 
     addActiveClass( i ) {
         this.setState({ active: i });
+        this.sendUpdate( i );
     };
+
+    sendUpdate = ( i ) => {
+        parseUpdateEventToParent( this, {
+            'color': i
+        }); 
+    }
     render() {
         return(
             <div>
-                <h4 className="mt-5">Kolor</h4>
+                <h4 className="mt-5">Kolor systemu</h4>
                 <hr></hr>
                 <div className="row justify-content-center">
                     {this.state.handleType.map((item, i) => (
