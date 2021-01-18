@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  background: #edf4fc !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -10,4 +11,131 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+form, .leftSide {
+  background: #ffffff;
+  border-radius: 3rem;
+}
+
+h4 {
+  /*font-family: "Noto Sans JP", sans-serif;*/
+  font-size: 16px;
+  font-weight: bold;
+}
+
+input {
+  background: #f6f6f6 !important;
+}
+
+input.btn {
+  color: black !important;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 20px;
+}
+
+p.lead { 
+  font-size: 1rem;
+}
+
+.form-pick::after {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: grey;
+  content: "\A";
+  display: inline-grid;
+  margin: 0 -10px;
+  position: absolute;
+  top: 0;
+  right: 20px;
+}
+
+.form-pick:hover {
+  cursor: pointer;
+}
+
+.form-pick.picked::after {
+  background: red;
+}
+
+.border-pick .form-pick {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.border-pick .form-pick::after {
+  top: 10px;
+}
+
+.form-pick .pick-name {
+  line-height: 18px;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.border-pick .pick-name {
+  font-size: 11px;
+}
+
+.border-pick .pick-name.charge::after {
+  content: attr( data-charge );
+  color: red;
+  display: block;
+  margin-left: 8px;
+}
+
+.header {
+  width: 100%;
+  padding: 2%;
+  background-color: burlywood;
+  color: white;
+  text-align: center;
+}
+
+.display-board {
+  width: 100%;
+  background-color: rgb(555, 200, 789);
+  padding: 5%;
+}
+
+.number {
+  color: red;
+  font-size: 75px;
+  text-align: center;
+}
+
+.mrgnbtm {
+  margin-top: 20px;
+}
+
+.price {
+  margin-top: -30px;
+}
+
+.price,
+.price1 {
+  padding-right: 20px;
+  margin: 0;
+}
+
+.price1 > small,
+.price > small {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 24px;
+  letter-spacing: 0.2px;
+  color: #3b3e51;
+}
+
+.price > span,
+.price1 > span {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 30px;
+  letter-spacing: 0.2px;
+  font-weight: bold;
+  color: #3b3e51;
+}
+.price > span {
+  color: #0089ed;
 }

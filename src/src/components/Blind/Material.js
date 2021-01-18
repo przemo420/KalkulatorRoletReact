@@ -31,14 +31,17 @@ export class Material extends React.Component {
 
     render() {
         return(
-            <div>
-                <h4 className="mt-5">Tkanina</h4>
-                <hr></hr>
-                <div className="row justify-content-center">
+            <div className="border-pick mt-3">
+                <h4 className="mb-0">Tkanina</h4>
+                <hr className="mt-1 mb-2"></hr>
+                <div className="row justify-content-center text-center">
                     {this.state.handleType.map((item, i) => (
-                    <div className={`col-md-3 col-12 m-2 p-2 text-center ` + (this.state.active === i ? 'alert alert-primary' : '')} onClick={() => this.addActiveClass(i)} key={i}>
-                         <img src={`images/material/`+item.img+'.png'} alt="Tkanina" width="80%"/>
-                     </div>
+                    <div className='col-md-2 col-4 m-0 p-0' onClick={() => this.addActiveClass(i)} key={i}>
+                        <div className={ "m-2 p-2 form-pick " + (this.state.active === i ? 'picked' : '')}>
+                            <img src={`images/material/`+item.img+'.png'} alt={ item.name } width="50px" height="40px"/>
+                        </div>
+                        <p className={ `pick-name ` + ( item.price ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
+                    </div>
                     ))}
                 </div>
             </div>

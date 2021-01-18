@@ -16,8 +16,10 @@ class Blind extends React.Component {
 
         this.state = { startData: { 'load': false } };
         this.formState = {};
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateData = this.updateData.bind(this);
+        this.addBlind = this.addBlind.bind(this);
     }
 
     componentDidMount() {
@@ -37,8 +39,24 @@ class Blind extends React.Component {
         .then( conf => {
           console.log( 'startData loaded', conf );
           conf.load = true;
+          
           this.setState({ startData: conf, configLoad: true });
         });
+    }
+
+    addBlind = () => {
+        //console.log(  );
+
+        this.formState.blindColor = this.state.startData.color[ this.formState.color ].name;
+        this.formState.blindMaterial = this.state.startData.mat[ this.formState.material ].name;
+
+        
+        this.props.updatePrev({
+            blinds: this.formState,
+            price: this.state.priceData.price,
+            qty: this.state.priceData.qty
+        });
+        console.log( 'addBlind' );
     }
 
     updateData = ( data ) => {
@@ -46,9 +64,12 @@ class Blind extends React.Component {
         
         if( Object.keys( this.formState ).length === 5 ) { // Wszystkie pola uzupełnione
             updateFormData( this.formState ).then( ret => {
-                let priceData = { price: ret.price, qty: ret.qty };
-                
-                this.setState({ priceData: priceData, configLoad: false });
+                if( ret.success ) {
+                    let priceData = { price: ret.price, qty: ret.qty };
+                    
+                    this.setState({ priceData: priceData });
+                }
+
                 console.log( 'returnFormData', ret );
             })
         }
@@ -61,16 +82,19 @@ class Blind extends React.Component {
 
         console.log( this.formState );
         event.preventDefault();
+        alert( 'Nie podłączono z serwerem MAIL.' );
+        return false;
     }
+
     render(){
         return(
-            <form onSubmit={ this.handleSubmit }>
+            <form className="p-4" onSubmit={ this.handleSubmit }>
                 <Header></Header>
                 <Dimensions config={ this.state.startData } onUpdate={ this.updateData }></Dimensions>
                 <Installation config={ this.state.startData } onUpdate={ this.updateData }></Installation>
                 <Material config={ this.state.startData } onUpdate={ this.updateData }></Material>
                 <Color config={ this.state.startData } onUpdate={ this.updateData }></Color>
-                <Price config={ this.state.startData } data={ this.state.priceData } onUpdate={ this.updateData }></Price>
+                <Price config={ this.state.startData } data={ this.state.priceData } addBlind={ this.addBlind }></Price>
                 <Contact config={ this.state.startData } onUpdate={ this.updateData }></Contact>
             </form>
         )

@@ -52,25 +52,23 @@ export default class Dimensions extends React.Component {
 
     handleChange = (event) => {
         const target = event.target;
-        let value = target.type === 'checkbox' ? target.checked : parseInt( target.value );
+        let value = target.type === 'checkbox' ? target.checked : ( target.value ).replace( ',', '.' );
         const name = target.name;
 
+        //if( isNaN( value ) ) value = '';
+
+        /*if( value > 10 ) {
+            value = Math.ceil( value / 10 ) * 10;
+        }*/
+
         if( name === 'width' ) {
-            if( isNaN( value ) ) value = this.state.validate.width.min;
-
-            value = Math.ceil( value / 10 ) * 10;
-
-            if( value < this.state.validate.width.min ) this.setState({ h: 'in', 'msg': 'Minimalna szerokość to '+ this.state.validate.width.min +'cm' });
-            else if( value > this.state.validate.width.max ) this.setState({ h: 'in', 'msg': 'Maksymalna szerokość to '+ this.state.validate.width.max +'cm' });
-            else this.setState({ h: '', 'msg': '' });
+            if( value < this.state.validate.width.min || isNaN( value ) ) this.setState({ h: 'in', 'hmsg': 'Minimalna szerokość to '+ this.state.validate.width.min +'.00 cm' });
+            else if( value > this.state.validate.width.max ) this.setState({ h: 'in', 'hmsg': 'Maksymalna szerokość to '+ this.state.validate.width.max +'cm' });
+            else this.setState({ h: '', 'hmsg': '' });
         } else if( name === 'height' ) {
-            if( isNaN( value ) ) value = this.state.validate.height.min;
-            
-            value = Math.ceil( value / 10 ) * 10;
-
-            if( value < this.state.validate.height.min ) this.setState({ v: 'in', 'msg': 'Minimalna wysokość to '+ this.state.validate.height.min +'cm' });
-            else if( value > this.state.validate.height.max ) this.setState({ v: 'in', 'msg': 'Maksymalna wysokość to '+ this.state.validate.height.max +'cm' });
-            else this.setState({ v: '', 'msg': '' });
+            if( value < this.state.validate.height.min || isNaN( value ) ) this.setState({ v: 'in', 'vmsg': 'Minimalna wysokość to '+ this.state.validate.height.min +'.00 cm' });
+            else if( value > this.state.validate.height.max ) this.setState({ v: 'in', 'vmsg': 'Maksymalna wysokość to '+ this.state.validate.height.max +'cm' });
+            else this.setState({ v: '', 'vmsg': '' });
         }
 
         this.setState({
@@ -95,14 +93,31 @@ export default class Dimensions extends React.Component {
     render() {
         return(
         <div className="form-group">
-            <h4 className="mt-5">Wymiary</h4>
-            <hr></hr>
-            <div className="input-group">
-                <input type="text" onChange={this.handleChange} name="width" className={"form-control is-"+( this.state.h ?? 'in' )+"valid"} placeholder="Minimalna szerokość 50cm" value={this.state.width} />
-                <span className="input-group-text">x</span>
-                <input type="text" onChange={this.handleChange} name="height" className={"form-control is-"+( this.state.v ?? 'in' )+"valid"} placeholder="Minimalna wysokość 50cm" value={this.state.height}/>
-                <div className={"invalid-feedback "+( this.state.v || this.state.h ? '' : "d-none" )}>
-                    {this.state.msg}
+            <h4 className="mb-0">Wymiary</h4>
+            <hr className="mt-1 mb-3"></hr>
+
+            <div className="form-row">
+                <div className="col">
+                    <input type="text" onChange={this.handleChange} name="width" className={"form-control is-"+( this.state.h ?? 'in' )+"valid"} placeholder="Minimalna szerokość 50cm" value={this.state.width} />
+                    
+                    <div className={"invalid-feedback "+( this.state.h ? '' : "d-none" )}>
+                        { this.state.hmsg }
+                    </div>
+
+                    <small className="text-muted">
+                        minimalna szerokość rolety { this.state.validate.width.min }.00 cm
+                    </small>
+                </div>
+                <div className="col">
+                    <input type="text" onChange={this.handleChange} name="height" className={"form-control is-"+( this.state.v ?? 'in' )+"valid"} placeholder="Minimalna wysokość 50cm" value={this.state.height}/>
+                   
+                    <div className={"invalid-feedback "+( this.state.v ? '' : "d-none" )}>
+                        { this.state.vmsg }
+                    </div>
+
+                    <small className="text-muted">
+                        minimalna wysokość rolety { this.state.validate.height.min }.00 cm
+                    </small>
                 </div>
             </div>
         </div>)

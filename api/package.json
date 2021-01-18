@@ -1,7 +1,7 @@
 {
-  "name": "react-nodejs-example",
+  "name": "Kalkulator-rolet",
   "version": "1.0.0",
-  "description": "example project react with nodejs",
+  "description": "Kalkulator rolet plisowanych.",
   "main": "server.js",
   "scripts": {
     "start": "node server.bundle.js",
