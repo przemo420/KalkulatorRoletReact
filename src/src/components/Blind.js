@@ -16,10 +16,12 @@ class Blind extends React.Component {
 
         this.state = { startData: { 'load': false } };
         this.formState = {};
+        this.waitingForSend = { 'status': false, 'statusList': {} };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateData = this.updateData.bind(this);
         this.addBlind = this.addBlind.bind(this);
+        this.updateForm = this.updateForm.bind(this);
     }
 
     componentDidMount() {
@@ -47,10 +49,11 @@ class Blind extends React.Component {
     addBlind = () => {
         //console.log(  );
 
-        this.formState.blindColor = this.state.startData.color[ this.formState.color ].name;
+        let tColor = this.state.startData.color[ this.formState.color ];
+        this.formState.blindColor = tColor.name;
+        this.formState.blindImage = tColor.image;
         this.formState.blindMaterial = this.state.startData.mat[ this.formState.material ].name;
 
-        
         this.props.updatePrev({
             blinds: this.formState,
             price: this.state.priceData.price,
@@ -62,17 +65,47 @@ class Blind extends React.Component {
     updateData = ( data ) => {
         this.formState = Object.assign( this.formState, data );
         
-        if( Object.keys( this.formState ).length === 5 ) { // Wszystkie pola uzupełnione
-            updateFormData( this.formState ).then( ret => {
-                if( ret.success ) {
-                    let priceData = { price: ret.price, qty: ret.qty };
-                    
-                    this.setState({ priceData: priceData });
-                }
+        if( Object.keys( this.formState ).length !== 5 ) return;
+        if( this.formState.width > this.state.startData.dim.width.max ||
+            this.formState.width < this.state.startData.dim.width.min ) return;
+        if( this.formState.height > this.state.startData.dim.height.max ||
+            this.formState.height < this.state.startData.dim.height.min ) return;
 
-                console.log( 'returnFormData', ret );
-            })
+        this.waitingForSend.statusList = this.formState;
+        
+        console.log( 'this.waitingForSend.status', this.waitingForSend.status);
+        if( this.waitingForSend.status === true ) {
+            console.log('BLok!');
+            return;
         }
+
+        this.waitingForSend.status = true;
+
+        if( typeof data.color === 'number' ) {
+            this.props.updatePrev({
+                previewImage: this.state.startData.color[ data.color ].img
+            });
+        }
+
+        setTimeout( this.updateForm, 1000);
+    }
+
+    updateForm = () => {
+        console.log( 'updateForm', this.waitingForSend.statusList);
+
+        updateFormData( this.waitingForSend.statusList ).then( ret => {
+            if( ret.success ) {
+                let priceData = { price: ret.price, qty: ret.qty };
+                    
+                this.setState({ priceData: priceData });
+            }
+
+            this.waitingForSend.status = false;
+
+            console.log( 'returnFormData', ret );
+        }).catch(err => {
+            this.waitingForSend.status = false;
+        });
     }
 
     handleSubmit = (event) => {

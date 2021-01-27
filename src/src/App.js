@@ -16,6 +16,10 @@ class App extends Component {
   updatePreview = (data) => {
     let fullPrice = this.state.fullPrice; let fullQty = this.state.fullQty; let fullBlinds = this.state.blinds.slice();
 
+    if( typeof data.previewImage === 'string' ) {
+      this.setState({ previewImage: data.previewImage });
+      return;
+    }
     fullPrice += data.price;
     fullQty += data.qty;
 

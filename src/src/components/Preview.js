@@ -10,29 +10,30 @@ export class Preview extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props;
 
+        
         if( typeof prop.data === 'undefined' || previousProps === this.props) return;
 
-        console.log( 'Prewview update', prop.data.blinds );
+        console.log( 'Preview update', prop.data.blinds );
 
         this.setState({
             blinds: prop.data.blinds,
             fullPrice: prop.data.fullPrice,
-            fullQty: prop.data.fullQty
+            fullQty: prop.data.fullQty,
+            previewImage: prop.data.previewImage
         })
     }
 
     render() {
         return(
-        <div>
-            <div className="p-4 leftSide">
-                <img src="images/bezinwazyjne.jpg" alt="Roleta plisowana" width="100%" />
+        <div class="fixed">
+            <div className="p-4 text-center leftSide">
+                <img src="images/bezinwazyjne.png" alt="Roleta plisowana" width="100%" id="previewFrame"/>
+                <div id="previewBlind" style={{ 
+                    backgroundImage: `url(images/color/`+this.state.previewImage+')'
+                }}></div>
             </div>
             <div className="p-4 leftSide mt-5">
-            {this.state.blinds.map((item, i) => (
-                <div className="alert alert-primary" key={ i }>Roleta { i + 1 } - { item.blindMaterial } - { item.blindColor } - { item.price } zł - { item.qty } szt.</div>
-            ))}
-            
-                <div className="pr-5 leftSide mt-5 text-right">
+                <div className="pr-5 leftSide mb-2 text-right">
                     <div className="price1">
                         <small>Cena:&nbsp;</small>
                         <span>{ (this.state.fullPrice).toFixed(2) }&nbsp;zł</span>
@@ -42,6 +43,9 @@ export class Preview extends React.Component {
                         <span>{ this.state.fullQty }&nbsp;szt.</span>
                     </div>
                 </div>
+            {this.state.blinds.map((item, i) => (
+                <div className="alert alert-primary" key={ i }>Roleta { i + 1 } - { item.blindMaterial } - { item.blindColor } - { item.price } zł - { item.qty } szt.</div>
+            ))}
             </div>
         </div>
         )

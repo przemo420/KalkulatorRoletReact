@@ -98,7 +98,7 @@ export default class Dimensions extends React.Component {
 
             <div className="form-row">
                 <div className="col">
-                    <input type="text" onChange={this.handleChange} name="width" className={"form-control is-"+( this.state.h ?? 'in' )+"valid"} placeholder="Minimalna szerokość 50cm" value={this.state.width} />
+                    <input type="number" onChange={this.handleChange} name="width" className={"form-control is-"+( this.state.h ?? 'in' )+"valid"} placeholder="Minimalna szerokość 50cm" value={this.state.width} />
                     
                     <div className={"invalid-feedback "+( this.state.h ? '' : "d-none" )}>
                         { this.state.hmsg }
@@ -109,7 +109,7 @@ export default class Dimensions extends React.Component {
                     </small>
                 </div>
                 <div className="col">
-                    <input type="text" onChange={this.handleChange} name="height" className={"form-control is-"+( this.state.v ?? 'in' )+"valid"} placeholder="Minimalna wysokość 50cm" value={this.state.height}/>
+                    <input type="number" onChange={this.handleChange} name="height" className={"form-control is-"+( this.state.v ?? 'in' )+"valid"} placeholder="Minimalna wysokość 50cm" value={this.state.height}/>
                    
                     <div className={"invalid-feedback "+( this.state.v ? '' : "d-none" )}>
                         { this.state.vmsg }
