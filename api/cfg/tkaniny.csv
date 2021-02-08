@@ -1,20 +1,19 @@
-
-nametype,img,price
-Kremowy, P201, 0
-Biały, P202, 1
-Krem. 2, P203, 0
-Żółty 1, P204, 0
-Żółty 2, P205, 0
-Brązowy 1, P206, 0
-Brązowy 2, P207, 0
-Pomarańcz, P208, 0
-Czerwony, P209, 0
-Bordowy, P210, 0
-Szary 1, P211, 0
-Szary 2, P212, 0
-Szary 3, P213, 0
-Czarny, P214, 0
-Zgniły, P215, 0
-Zielony, P216, 0
-Błękitny, P217, 0
-Niebieski, P218, 0
+name,img,price,
+"Kremowy","P201",0
+"Biały","P202",0
+"Krem.2","P203",0
+"Żółty1","P204",0
+"Żółty2","P205",0
+"Brązowy1","P206",0
+"Brązowy2","P207",0
+"Pomarańcz","P208",0
+"Czerwony","P209",0
+"Bordowy","P210",0
+"Szary1","P211",0
+"Szary2","P212",0
+"Szary3","P213",0
+"Czarny","P214",0
+"Zgniły","P215",0
+"Zielony","P216",0
+"Błękitny","P217",0
+"Niebieski","P218",0

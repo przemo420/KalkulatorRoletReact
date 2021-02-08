@@ -37,7 +37,7 @@ export class Installation extends React.Component {
                 <div className="row justify-content-center">
                     {this.state.handleType.map((item, i) => (
                     <div className={`col-md-3 col-12 form-pick ` + (this.state.active === i ? 'picked' : '')} onClick={() => this.addActiveClass(i)} key={i}>
-                         <img src={`images/handle/`+item.img} alt={item.name} width="80%"/>
+                         <img src={`images/handle/`+item.img+`.jpg`} alt={item.name} width="80%"/>
                          <p className={ `pick-name ` + ( item.price ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
                      </div>
                     ))}

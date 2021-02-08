@@ -36,9 +36,9 @@ export class Color extends React.Component {
                 return this.state.handleType.map((item, i) => (
                     <div className='col-md-2 col-4 m-0 p-0' onClick={() => this.addActiveClass(i)} key={i}>
                         <div className={ "m-2 p-2 form-pick " + (this.state.active === i ? 'picked' : '')}>
-                            <img src={this.state.bImgUrl+item.img} alt={ item.name } width="50px" height="40px"/>
+                            <img src={this.state.bImgUrl+item.img+'.jpg'} alt={ item.name } width="50px" height="40px"/>
                         </div>
-                        <p className={ `pick-name ` + ( item.price ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
+                        <p className={ `pick-name ` + ( item.price > 0 ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
                     </div>
                 ));
             }
@@ -47,7 +47,7 @@ export class Color extends React.Component {
         }
         return(
             <div className="border-pick mt-3">
-                <h4 className="mb-0">Kolor systemu</h4>
+                <h4 className="mb-0">Tkanina</h4>
                 <hr className="mt-1 mb-2"></hr>
                 <div className="row justify-content-center text-center">
                     { renderColorList() }

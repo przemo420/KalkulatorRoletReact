@@ -47,22 +47,24 @@ class Blind extends React.Component {
     }
 
     addBlind = () => {
-        //console.log(  );
+        let tColor = this.state.startData.color[ this.formState.color ]; let state = JSON.parse(JSON.stringify(this.formState));
 
-        let tColor = this.state.startData.color[ this.formState.color ];
-        this.formState.blindColor = tColor.name;
+        state.blindColor = tColor.name;
+        state.price = this.state.priceData.price;
+        state.blindMaterial = this.state.startData.mat[ state.material ].name;
+
         this.formState.blindImage = tColor.image;
-        this.formState.blindMaterial = this.state.startData.mat[ this.formState.material ].name;
 
         this.props.updatePrev({
-            blinds: this.formState,
+            blinds: state,
             price: this.state.priceData.price,
             qty: this.state.priceData.qty
         });
-        console.log( 'addBlind' );
+        console.log( 'addBlind', state);
     }
 
     updateData = ( data ) => {
+        console.log( 'updateData', data );
         this.formState = Object.assign( this.formState, data );
         
         if( Object.keys( this.formState ).length !== 5 ) return;
@@ -87,15 +89,15 @@ class Blind extends React.Component {
             });
         }
 
-        setTimeout( this.updateForm, 1000);
+        setTimeout( this.updateForm, 100);
     }
 
     updateForm = () => {
         console.log( 'updateForm', this.waitingForSend.statusList);
 
-        updateFormData( this.waitingForSend.statusList ).then( ret => {
+        updateFormData( this.waitingForSend.statusList, 'calc' ).then( ret => {
             if( ret.success ) {
-                let priceData = { price: ret.price, qty: ret.qty };
+                let priceData = { price: parseFloat(ret.price).toFixed(2), qty: ret.qty };
                     
                 this.setState({ priceData: priceData });
             }
@@ -112,16 +114,23 @@ class Blind extends React.Component {
         //const target = event.target;
         //let value = target.type === 'checkbox' ? target.checked : parseInt( target.value );
         //const name = target.name;
-
-        console.log( this.formState );
         event.preventDefault();
-        alert( 'Nie podłączono z serwerem MAIL.' );
-        return false;
+
+        let stringify = JSON.stringify( this.formState );
+        console.log( stringify );
+        var state = JSON.parse( stringify );
+        console.log( state );
+
+        this.props.handleSubmit( state );
+
+        
+
+        event.preventDefault();
     }
 
     render(){
         return(
-            <form className="p-4" onSubmit={ this.handleSubmit }>
+            <form className="p-4" onSubmit={(e) =>  this.handleSubmit(e) }>
                 <Header></Header>
                 <Dimensions config={ this.state.startData } onUpdate={ this.updateData }></Dimensions>
                 <Installation config={ this.state.startData } onUpdate={ this.updateData }></Installation>

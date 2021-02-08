@@ -6,6 +6,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+main {
+  height: 90% !important;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 code {
@@ -123,7 +134,7 @@ p.lead {
 .price1 > small,
 .price > small {
   font-family: "Noto Sans JP", sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   letter-spacing: 0.2px;
   color: #3b3e51;
 }
@@ -131,7 +142,7 @@ p.lead {
 .price > span,
 .price1 > span {
   font-family: "Noto Sans JP", sans-serif;
-  font-size: 30px;
+  font-size: 24px;
   letter-spacing: 0.2px;
   font-weight: bold;
   color: #3b3e51;
@@ -141,11 +152,11 @@ p.lead {
 }
 
 #previewBlind {
-  margin-top: -12rem;
+  margin-top: -260px;
   background-repeat: repeat;
-  width: 120px;
+  width: 175px;
   margin-left: auto;
-  height: 182px;
+  height: 240px;
   z-index: 999999;
   background-size: 99% 15%;
   z-index: 0;
@@ -154,9 +165,29 @@ p.lead {
 
 #previewFrame {
   z-index: 1;
-  max-height: 200px;
+  max-height: 300px;
     width: auto;
     margin: auto;
     /*position: fixed;*/
 }
 .fixed { position: fixed }
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+ }
+ ::-webkit-scrollbar-thumb {
+  background: linear-gradient(13deg, #c7ceff 100%,#d9d9d9 100%);
+  border-radius: 10px;
+ }
+ ::-webkit-scrollbar-thumb:hover{
+  background: linear-gradient(43deg, #c7ceff 14%,#cccccc 64%);
+ }
+ ::-webkit-scrollbar-track{
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: inset -30px 10px 12px #f0f0f0;
+ }
+
+ .overflow { overflow: auto }
+ .form-label { display: contents !important }

@@ -26,54 +26,53 @@ var config = {
             'max': 0//2000
         }
     },
-    'ins': [
-        {'name': 'Montaż bezinwazyjny standard', 'img': 'first.jpg', 'price': 0},
-        {'name': 'Montaż bezinwazyjny do okien z nawiewnikiem', 'img': 'secend.jpg', 'price': 0},
-        {'name': 'Montaż inwazyjny', 'img': 'third.jpg', 'price': 1 }
-    ],
-    'mat': [
-        { 'name': 'Antracyt', 'img': 'antracyt', 'price': 0 },
-        //{ 'name': 'Antracyt2', 'img': 'antracyt2', 'price': 0 },
-        { 'name': 'Biały', 'img': 'biel', 'price': 5 },
-        { 'name': 'Brąz', 'img': 'braz', 'price': 0 },
-        { 'name': 'Dąb bag.', 'img': 'dabbagienny', 'price': 0 },
-        { 'name': 'Kremowy', 'img': 'krem', 'price': 2 },
-        { 'name': 'Mahon', 'img': 'mahon', 'price': 0 },
-        { 'name': 'Orzech', 'img': 'orzech', 'price': 0 },
-        { 'name': 'Sosna', 'img': 'sosna', 'price': 0 },
-        { 'name': 'Winchester', 'img': 'winchester', 'price': 8 },
-        { 'name': 'Złoty dąb', 'img': 'zlotydab', 'price': 0 },
-        //{ 'name': 'Złoty dąb2', 'img': 'zlotydab2', 'price': 0 }
-    ],
-    'color': [
-        { 'name': 'Kremowy', 'img': 'P201.jpg', 'price': 0 },
-        { 'name': 'Biały', 'img': 'P202.jpg', 'price': 1 },
-        { 'name': 'Krem. 2', 'img': 'P203.jpg', 'price': 0 },
-        { 'name': 'Żółty 1', 'img': 'P204.jpg', 'price': 4 },
-        { 'name': 'Żółty 2', 'img': 'P205.jpg', 'price': 0 },
-        { 'name': 'Brązowy 1', 'img': 'P206.jpg', 'price': 0 },
-        { 'name': 'Brązowy 2', 'img': 'P207.jpg', 'price': 5 },
-        { 'name': 'Pomarańcz', 'img': 'P208.jpg', 'price': 0 },
-        { 'name': 'Czerwony', 'img': 'P209.jpg', 'price': 0 },
-        { 'name': 'Bordowy', 'img': 'P210.jpg', 'price': 0 },
-        { 'name': 'Szary 1', 'img': 'P211.jpg', 'price': 0 },
-        { 'name': 'Szary 2', 'img': 'P212.jpg', 'price': 7 },
-        { 'name': 'Szary 3', 'img': 'P213.jpg', 'price': 0 },
-        { 'name': 'Czarny', 'img': 'P214.jpg', 'price': 0 },
-        { 'name': 'Zgniły', 'img': 'P215.jpg', 'price': 13 },
-        { 'name': 'Zielony', 'img': 'P216.jpg', 'price': 0 },
-        { 'name': 'Błękitny', 'img': 'P217.jpg', 'price': 0 },
-        { 'name': 'Niebieski', 'img': 'P218.jpg', 'price': 0 }
-    ],
-    'pricePerQty': 2.50
+    'ins': [],
+    'mat': [],
+    'color': [],
+    'pricePerQty': 0
 };
 
-fs.createReadStream( CFG_DIR + 'tkaniny.csv' ).pipe( csv({ skipLines: 1 }) )
+var mailTransporter = nodeMailer.createTransport({
+    host: 'mail48.mydevil.net',
+    port: 465,
+    secure: true,
+    auth: {
+      user: 'rolety@sztosit.eu',
+      pass: 'SIBZh953ehEu96AoOTW4'
+    }
+});
+
+fs.createReadStream( CFG_DIR + 'inne.csv' ).pipe( csv() )
     .on('data', (data) => {
-        console.log(data);
+        config.allegro = data[ 'allegro' ];
+        config.pricePerQty = data[ 'cena' ];
     })
     .on('end', () => {
-        console.log( 'Załadowano plik konfiguracyjny.' );
+        console.log( 'Załadowano plik inne.csv' );
+    });
+
+fs.createReadStream( CFG_DIR + 'montaz.csv' ).pipe( csv() )
+    .on('data', (data) => {
+        config.ins.push( data );
+    })
+    .on('end', () => {
+        console.log( 'Załadowano plik montaz.csv' );
+    });
+
+fs.createReadStream( CFG_DIR + 'systemy.csv' ).pipe( csv() )
+    .on('data', (data) => {
+        config.mat.push( data );
+    })
+    .on('end', () => {
+        console.log( 'Załadowano plik systemy.csv' );
+    });
+
+fs.createReadStream( CFG_DIR + 'tkaniny.csv' ).pipe( csv() )
+    .on('data', (data) => {
+        config.color.push( data );
+    })
+    .on('end', () => {
+        console.log( 'Załadowano plik tkaniny.csv' );
     });
 
 let results = {};
@@ -117,7 +116,7 @@ fs.createReadStream( CFG_DIR + 'plisy.csv' ).pipe( csv({ skipLines: 1 }) )
         results[ height ] = sTempData;
     })
   .on('end', () => {
-    console.log( 'Załadowano plik konfiguracyjny.' );
+    console.log( 'Załadowano plikp plisy.csv' );
 });
 
 app.use(bodyParser.json());
@@ -136,7 +135,41 @@ app.get('/api/start', (req, res) => {
     res.json(config);
 });
 
-app.post('/api/form/calc', (req, res) => {
+function parseBlindInformation( blind ) {
+    return (
+        'Szerokość: ' + blind.width + 'cm, Wysokość: ' + blind.height + 'cm, ' + 
+        config.ins[ blind.installation ].name + ', ' +
+        config.mat[ blind.material ].name + ', ' +
+        config.color[ blind.color ].name + '<br>'
+    );
+}
+
+app.post('/api/form-send', (req, res) => {
+    let data = req.body; let text = "<b>Dziękujemy za skorzystanie z naszego kalkulatora!</b><br><hr><br>Twoje zestawy:<br>";
+    console.log( data );
+
+    for( i=0; i < data.blinds.length; i++ ) {
+        text += '<strong>' + (i+1) + '</strong>. ' + parseBlindInformation( data.blinds[ i ] );
+    }
+
+    text += '<br><hr><br>Cena całkowita: ' + data.price + '<br>Ilość sztuk: ' + data.qty;
+
+    mailTransporter.sendMail({
+        from: 'Kalkulator rolet <rolety@sztosit.eu>', // sender address
+        to: data.email, // list of receivers
+        subject: "Kalkulator Rolet - Wyliczenie", // Subject line
+        html: text, // html body
+    }, function(err) {
+        if (err) {
+            console.log( 'sendMailer error', err);
+            
+            return res.json({ 'success': false, 'msg': 'Wystąpił błąd wysyłania!' });
+        }
+
+        res.json({ 'success': true, 'msg': 'Wysłano zapytanie.' });
+    });
+});
+app.post('/api/form-calc', (req, res) => {
     const body = req.body; let valid = false;
 
     if( typeof body.width === 'undefined' || 

@@ -32,7 +32,7 @@ export class Material extends React.Component {
     render() {
         return(
             <div className="border-pick mt-3">
-                <h4 className="mb-0">Tkanina</h4>
+                <h4 className="mb-0">Kolor systemu</h4>
                 <hr className="mt-1 mb-2"></hr>
                 <div className="row justify-content-center text-center">
                     {this.state.handleType.map((item, i) => (
@@ -40,7 +40,7 @@ export class Material extends React.Component {
                         <div className={ "m-2 p-2 form-pick " + (this.state.active === i ? 'picked' : '')}>
                             <img src={`images/material/`+item.img+'.png'} alt={ item.name } width="50px" height="40px"/>
                         </div>
-                        <p className={ `pick-name ` + ( item.price ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
+                        <p className={ `pick-name ` + ( item.price > 0 ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
                     </div>
                     ))}
                 </div>

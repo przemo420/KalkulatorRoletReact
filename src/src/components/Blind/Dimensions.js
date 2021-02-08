@@ -98,26 +98,36 @@ export default class Dimensions extends React.Component {
 
             <div className="form-row">
                 <div className="col">
-                    <input type="number" onChange={this.handleChange} name="width" className={"form-control is-"+( this.state.h ?? 'in' )+"valid"} placeholder="Minimalna szerokość 50cm" value={this.state.width} />
-                    
-                    <div className={"invalid-feedback "+( this.state.h ? '' : "d-none" )}>
-                        { this.state.hmsg }
-                    </div>
+                    <div className="input-group">
+                        <input type="number" onChange={this.handleChange} name="width" className={"form-control is-"+( this.state.h ?? 'in' )+"valid"} placeholder="Minimalna szerokość 50cm" value={this.state.width} required />
+                        <div className="input-group-append">
+                            <span className="input-group-text">cm</span>
+                        </div>
 
-                    <small className="text-muted">
-                        minimalna szerokość rolety { this.state.validate.width.min }.00 cm
-                    </small>
+                        <div className={"invalid-feedback "+( this.state.h ? '' : "d-none" )}>
+                            { this.state.hmsg }
+                        </div>
+
+                        <small className="text-muted">
+                            minimalna szerokość rolety { this.state.validate.width.min }.00 cm
+                        </small>
+                    </div>
                 </div>
                 <div className="col">
-                    <input type="number" onChange={this.handleChange} name="height" className={"form-control is-"+( this.state.v ?? 'in' )+"valid"} placeholder="Minimalna wysokość 50cm" value={this.state.height}/>
-                   
-                    <div className={"invalid-feedback "+( this.state.v ? '' : "d-none" )}>
-                        { this.state.vmsg }
-                    </div>
+                    <div className="input-group">
+                        <input type="number" onChange={this.handleChange} name="height" className={"form-control is-"+( this.state.v ?? 'in' )+"valid"} placeholder="Minimalna wysokość 50cm" value={this.state.height} required />
+                        <div className="input-group-append">
+                            <span className="input-group-text">cm</span>
+                        </div>
 
-                    <small className="text-muted">
-                        minimalna wysokość rolety { this.state.validate.height.min }.00 cm
-                    </small>
+                        <div className={"invalid-feedback "+( this.state.v ? '' : "d-none" )}>
+                            { this.state.vmsg }
+                        </div>
+
+                        <small className="text-muted">
+                            minimalna wysokość rolety { this.state.validate.height.min }.00 cm
+                        </small>
+                    </div>
                 </div>
             </div>
         </div>)

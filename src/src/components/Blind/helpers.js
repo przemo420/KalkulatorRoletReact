@@ -3,3 +3,8 @@ export function parseUpdateEventToParent( $this, props ) {
         $this.props.onUpdate( props ); 
     }, 100 );
 }
+
+export function cloneStateValue( value ) {
+    //return JSON.parse( JSON.stringify( value ) );
+    return value.slice(0);
+}
