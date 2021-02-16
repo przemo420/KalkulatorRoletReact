@@ -1,13 +1,13 @@
-const prodUrl = process.env.NODE_ENV === 'development' ? 'http://localhost' : 'http://rolety.sztosit.eu';
+const prodUrl = process.env.NODE_ENV === 'development' ? 'localhost/api/' : 'https://rolety.sztosit.eu/api/';
 
 export async function getStartConfig() {
-    const response = await fetch( prodUrl + ':3080/api/start' );
+    const response = await fetch( prodUrl + 'start' );
     
     return response.json();
 }
 
 export async function updateFormData( data, type ) {
-    const response = await fetch( prodUrl + ':3080/api/form-'+type, {
+    const response = await fetch( prodUrl + 'form-'+type, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', "X-Requested-With": "XMLHttpRequest" },
         body: JSON.stringify( data )

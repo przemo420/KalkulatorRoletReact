@@ -6,12 +6,7 @@ const app = express(),
       csv = require('csv-parser'),
       fs = require('fs'),
       nodeMailer = require('nodemailer'),
-      port = 3080;
-
-app.use(cors());
-
-const { createProxyMiddleware } = require('http-proxy-middleware');
-const { getUnpackedSettings } = require('http2');
+      port = 3000;
 
 const CFG_DIR = './cfg/';
 // place holder for the data
@@ -30,9 +25,7 @@ var config = {
     'mat': [],
     'color': [],
     'pricePerQty': 0
-};
-
-var mailTransporter = nodeMailer.createTransport({
+}, mailTransporter = nodeMailer.createTransport({
     host: 'mail48.mydevil.net',
     port: 465,
     secure: true,
@@ -40,7 +33,7 @@ var mailTransporter = nodeMailer.createTransport({
       user: 'rolety@sztosit.eu',
       pass: 'SIBZh953ehEu96AoOTW4'
     }
-});
+}), results = {};
 
 fs.createReadStream( CFG_DIR + 'inne.csv' ).pipe( csv() )
     .on('data', (data) => {
@@ -75,7 +68,6 @@ fs.createReadStream( CFG_DIR + 'tkaniny.csv' ).pipe( csv() )
         console.log( 'Załadowano plik tkaniny.csv' );
     });
 
-let results = {};
 fs.createReadStream( CFG_DIR + 'plisy.csv' ).pipe( csv({ skipLines: 1 }) )
     .on('data', (data) => {
         let height = data['wys\\szer'];
@@ -119,30 +111,17 @@ fs.createReadStream( CFG_DIR + 'plisy.csv' ).pipe( csv({ skipLines: 1 }) )
     console.log( 'Załadowano plikp plisy.csv' );
 });
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../src/public')));
 
-/*app.use('/api', createProxyMiddleware({ 
-    target: 'http://rolety.sztosit.eu/', //original url
-    changeOrigin: true, 
-    //secure: false,
-    onProxyRes: function (proxyRes, req, res) {
-       proxyRes.headers['Access-Control-Allow-Origin'] = '*';
-    }
-}));*/
+app.listen(port, () => {
+    console.log(`Server listening on the port: ${port}`);
+});
 
 app.get('/api/start', (req, res) => {
     res.json(config);
 });
-
-function parseBlindInformation( blind ) {
-    return (
-        'Szerokość: ' + blind.width + 'cm, Wysokość: ' + blind.height + 'cm, ' + 
-        config.ins[ blind.installation ].name + ', ' +
-        config.mat[ blind.material ].name + ', ' +
-        config.color[ blind.color ].name + '<br>'
-    );
-}
 
 app.post('/api/form-send', (req, res) => {
     let data = req.body; let text = "<b>Dziękujemy za skorzystanie z naszego kalkulatora!</b><br><hr><br>Twoje zestawy:<br>";
@@ -229,11 +208,7 @@ app.post('/api/form-calc', (req, res) => {
 });
 
 app.get('/', (req,res) => {
-  res.sendFile(path.join(__dirname, '../src/public/index.html'));
-});
-
-app.listen(port, () => {
-    console.log(`Server listening on the port: ${port}`);
+  res.sendFile(path.join(__dirname, 'public_nodejs/index.html'));
 });
 
 function parseErrorPostMessage( msg ) {
@@ -244,6 +219,15 @@ function parseSpecifyStringToFloat( data ) {
     let i = parseFloat( data.replace(",", ".") );
     i *= 100;
     return parseInt( i.toFixed(0) );
+}
+
+function parseBlindInformation( blind ) {
+    return (
+        'Szerokość: ' + blind.width + 'cm, Wysokość: ' + blind.height + 'cm, ' + 
+        config.ins[ blind.installation ].name + ', ' +
+        config.mat[ blind.material ].name + ', ' +
+        config.color[ blind.color ].name + '<br>'
+    );
 }
 
 const navObj = (obj, currentKey, direction) => {
