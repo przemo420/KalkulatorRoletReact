@@ -81,11 +81,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="row h-100 App mt-5">
+      <div className="row App mt-5">
           <article className="col-md-6">
             <Preview data={ this.state } removeBlind={ this.removeBlind }></Preview>
           </article>
-          <article className="col-md-6 h-75 overflow">
+          <article className="col-md-6 overflow">
             <Blind updatePrev={ this.updatePreview } handleSubmit={ this.handleSubmit }></Blind>
           </article>
       </div>

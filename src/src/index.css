@@ -189,5 +189,15 @@ p.lead {
   box-shadow: inset -30px 10px 12px #f0f0f0;
  }
 
- .overflow { overflow: auto }
  .form-label { display: contents !important }
+
+@media screen and (min-width: 400px) {
+  html, body, main, div.App { height: 100%!important }
+  article.overflow { height: 75%!important }
+  .overflow { overflow: auto }
+}
+
+@media screen and (max-width: 400px) {
+  body { overflow: auto }
+  footer { display: none!important }
+}
