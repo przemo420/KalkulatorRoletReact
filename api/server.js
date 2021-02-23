@@ -150,12 +150,14 @@ const webp = require('webp-converter');
 const convertPath = '../src/public/images/';
 
 convertFolderToWebp( 'color' );
+convertFolderToWebp( 'material' );
+
 function convertFolderToWebp( folderName ) {
     let fullPath = convertPath + folderName + '/';
 
     fs.readdirSync( fullPath ).forEach(file => {
         var oldFile = fullPath + file;
-        var newFile = oldFile.replace('jpg','webp');
+        var newFile = oldFile.replace('jpg','webp').replace('png','webp');
 
         if( file[0] === '_' || fs.existsSync( fullPath + newFile ) ) return;
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'react-image-webp';
 import { parseUpdateEventToParent } from './helpers'
 
 export class Material extends React.Component {
@@ -38,7 +39,10 @@ export class Material extends React.Component {
                     {this.state.handleType.map((item, i) => (
                     <div className='col-md-2 col-4 m-0 p-0' onClick={() => this.addActiveClass(i)} key={i}>
                         <div className={ "m-2 p-2 form-pick " + (this.state.active === i ? 'picked' : '')}>
-                            <img src={`images/material/`+item.img+'.png'} alt={ item.name } width="50px" height="40px"/>
+                            <Image
+                                src={`images/material/`+item.img+'.png'}
+                                webp={`images/material/`+item.img+'.webp'}
+                            />
                         </div>
                         <p className={ `pick-name ` + ( item.price > 0 ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
                     </div>
