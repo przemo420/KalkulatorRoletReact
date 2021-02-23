@@ -191,13 +191,13 @@ p.lead {
 
  .form-label { display: contents !important }
 
-@media screen and (min-width: 400px) {
+@media screen and (min-width: 768px) {
   html, body, main, div.App { height: 100%!important }
   article.overflow { height: 75%!important }
   .overflow { overflow: auto }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 768px) {
   body { overflow: auto }
   footer { display: none!important }
 }

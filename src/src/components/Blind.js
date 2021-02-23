@@ -67,7 +67,7 @@ class Blind extends React.Component {
         console.log( 'updateData', data );
         this.formState = Object.assign( this.formState, data );
         
-        if( Object.keys( this.formState ).length !== 5 ) return;
+        if( Object.keys( this.formState ).length < 5 ) return;
         if( this.formState.width > this.state.startData.dim.width.max ||
             this.formState.width < this.state.startData.dim.width.min ) return;
         if( this.formState.height > this.state.startData.dim.height.max ||

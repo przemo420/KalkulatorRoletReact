@@ -11,6 +11,7 @@ export class Price extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props;
 
+        console.log( 'Price.js componentDidUpdate', prop );
         if( typeof prop.data === 'undefined' || prop.data.price === this.state.price ) return;
 
         this.setState({ price: prop.data.price, qty: prop.data.qty, allegro: prop.config.allegro });

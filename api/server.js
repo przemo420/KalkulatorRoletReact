@@ -24,92 +24,27 @@ var config = {
     'ins': [],
     'mat': [],
     'color': [],
-    'pricePerQty': 0
-}, mailTransporter = nodeMailer.createTransport({
-    host: 'mail48.mydevil.net',
-    port: 465,
-    secure: true,
-    auth: {
-      user: 'rolety@sztosit.eu',
-      pass: 'SIBZh953ehEu96AoOTW4'
+    'pricePerQty': 0,
+    'mail': {
+        'from': 'Kalkulator rolet <rolety@sztosit.eu>',
+        'subject': 'Kalkulator Rolet - Wyliczenie',
+        'transport': {
+            'host': 'mail48.mydevil.net',
+            'port': 465,
+            'secure': true,
+            'auth': {
+                'user': 'rolety@sztosit.eu',
+                'pass': 'SIBZh953ehEu96AoOTW4'
+            }
+        }
     }
-}), results = {};
+}, mailTransporter = nodeMailer.createTransport( config.mail.transport ), results = {};
 
-fs.createReadStream( CFG_DIR + 'inne.csv' ).pipe( csv() )
-    .on('data', (data) => {
-        config.allegro = data[ 'allegro' ];
-        config.pricePerQty = data[ 'cena' ];
-    })
-    .on('end', () => {
-        console.log( 'Załadowano plik inne.csv' );
-    });
-
-fs.createReadStream( CFG_DIR + 'montaz.csv' ).pipe( csv() )
-    .on('data', (data) => {
-        config.ins.push( data );
-    })
-    .on('end', () => {
-        console.log( 'Załadowano plik montaz.csv' );
-    });
-
-fs.createReadStream( CFG_DIR + 'systemy.csv' ).pipe( csv() )
-    .on('data', (data) => {
-        config.mat.push( data );
-    })
-    .on('end', () => {
-        console.log( 'Załadowano plik systemy.csv' );
-    });
-
-fs.createReadStream( CFG_DIR + 'tkaniny.csv' ).pipe( csv() )
-    .on('data', (data) => {
-        config.color.push( data );
-    })
-    .on('end', () => {
-        console.log( 'Załadowano plik tkaniny.csv' );
-    });
-
-fs.createReadStream( CFG_DIR + 'plisy.csv' ).pipe( csv({ skipLines: 1 }) )
-    .on('data', (data) => {
-        let height = data['wys\\szer'];
-        tempData = data;
-        delete tempData['wys\\szer'];
-
-        var sTempData = {};
-        for ( var item in tempData ) {
-            var i = parseSpecifyStringToFloat( item );
-            sTempData[ i ] = tempData[ item ];
-        }
-
-        let sTempKeys = Object.keys( sTempData );
-        config.dim.width.min = parseInt( sTempKeys[0] );
-        config.dim.width.max = parseInt( sTempKeys[ sTempKeys.length-1 ] );
-
-        if( height === 'undefined' ) {
-            console.log( height, data, '!!! UNDEFINED');
-            return;
-        }
-        height = parseSpecifyStringToFloat( height );
-    
-      //if( typeof config.dim.height.max === 'undefined' ) {
-      //    config.dim.height.max = height;
-      //}
-
-        if( config.dim.height.max < height ) {
-            // Zmiana maksymalnej wysokości
-            config.dim.height.max = height;
-        }
-      
-        if ( typeof config.dim.height.min === 'undefined' || config.dim.height.min == 0 || config.dim.height.min > height ) {
-            // Zmiana minimalnej wysokości
-            config.dim.height.min = height;
-        }
-
-        //console.log( 'Wysokość:', height, typeof height, config.dim.height );
-        results[ height ] = sTempData;
-    })
-  .on('end', () => {
-    console.log( 'Załadowano plikp plisy.csv' );
-});
+loadConfigFile( 'inne' );
+loadConfigFile( 'plisy', '', { skipLines: 1 } );
+loadConfigFile( 'montaz', 'ins' );
+loadConfigFile( 'systemy', 'mat' );
+loadConfigFile( 'tkaniny', 'color' );
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -134,9 +69,9 @@ app.post('/api/form-send', (req, res) => {
     text += '<br><hr><br>Cena całkowita: ' + data.price + '<br>Ilość sztuk: ' + data.qty;
 
     mailTransporter.sendMail({
-        from: 'Kalkulator rolet <rolety@sztosit.eu>', // sender address
+        from: config.mail.from, // sender address
         to: data.email, // list of receivers
-        subject: "Kalkulator Rolet - Wyliczenie", // Subject line
+        subject: config.mail.subject, // Subject line
         html: text, // html body
     }, function(err) {
         if (err) {
@@ -230,6 +165,67 @@ function parseBlindInformation( blind ) {
     );
 }
 
+function loadConfigFile( fileName, cfgName='', csvConfig={} ) {
+    let fsh = fs.createReadStream( CFG_DIR + fileName + '.csv' ).pipe( csv( csvConfig ) );
+
+    switch( fileName ) {
+        case 'plisy': {
+            fsh.on('data', (data) => {
+                let height = data['wys\\szer'];
+                tempData = data;
+                delete tempData['wys\\szer'];
+        
+                var sTempData = {};
+                for ( var item in tempData ) {
+                    var i = parseSpecifyStringToFloat( item );
+                    sTempData[ i ] = tempData[ item ];
+                }
+        
+                let sTempKeys = Object.keys( sTempData );
+                config.dim.width.min = parseInt( sTempKeys[0] );
+                config.dim.width.max = parseInt( sTempKeys[ sTempKeys.length-1 ] );
+        
+                if( height === 'undefined' ) {
+                    console.log( height, data, '!!! UNDEFINED');
+                    return;
+                }
+                height = parseSpecifyStringToFloat( height );
+            
+            //if( typeof config.dim.height.max === 'undefined' ) {
+            //    config.dim.height.max = height;
+            //}
+        
+                if( config.dim.height.max < height ) {
+                    // Zmiana maksymalnej wysokości
+                    config.dim.height.max = height;
+                }
+            
+                if ( typeof config.dim.height.min === 'undefined' || config.dim.height.min == 0 || config.dim.height.min > height ) {
+                    // Zmiana minimalnej wysokości
+                    config.dim.height.min = height;
+                }
+        
+                //console.log( 'Wysokość:', height, typeof height, config.dim.height );
+                results[ height ] = sTempData;
+            });
+        } break;
+        case 'inne': {
+            fsh.on('data', (data) => {
+                config.allegro = data[ 'allegro' ];
+                config.pricePerQty = data[ 'cena' ];
+            });
+        } break;
+        default: {
+            fsh.on('data', (data) => {
+                config[ cfgName ].push( data );
+            });
+        }
+    }
+
+    fsh.on('end', () => {
+        console.log( 'Załadowano plik ' + fileName + '.csv' );
+    });
+}
 const navObj = (obj, currentKey, direction) => {
     return Object.values(obj)[Object.keys(obj).indexOf(currentKey) + direction];
 };
