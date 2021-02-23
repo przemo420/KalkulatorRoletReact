@@ -1,10 +1,12 @@
-import React from 'react'
+import React from 'react';
+import {isWebpSupported} from 'react-image-webp/dist/utils';
 
 export class Preview extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = { blinds: [], fullPrice: 0, fullQty: 0, previewImage: 'P201' };
+        this.extension = isWebpSupported() ? [ 'webp', 'webp' ] : [ 'jpg', 'png' ];
 
         this.removeBlind = this.removeBlind.bind(this);
     }
@@ -32,9 +34,9 @@ export class Preview extends React.Component {
         <div>
             <div className="">
                 <div className="p-4 text-center leftSide">
-                    <img src="images/bezinwazyjne.png" alt="Roleta plisowana" width="100%" id="previewFrame"/>
+                    <img src={"images/bezinwazyjne."+this.extension[1]} alt="Roleta plisowana" width="100%" id="previewFrame"/>
                     <div id="previewBlind" style={{ 
-                        backgroundImage: `url('images/color/`+this.state.previewImage+`.jpg')`
+                        backgroundImage: `url('images/color/` + this.state.previewImage + `.` + this.extension[0] + `')`
                     }}></div>
                 </div>
                 <div className="p-4 leftSide mt-5">

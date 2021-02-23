@@ -1,4 +1,5 @@
 import React from 'react'
+import Image from 'react-image-webp';
 import { parseUpdateEventToParent } from './helpers'
 
 export class Installation extends React.Component {
@@ -34,11 +35,15 @@ export class Installation extends React.Component {
             <div>
                 <h4 className="mb-0">Typ montażu</h4>
                 <hr className="mt-1 mb-3"></hr>
-                <div className="row justify-content-center">
+                <div className="row justify-content-center text-center">
                     {this.state.handleType.map((item, i) => (
-                    <div className={`col-md-3 col-12 form-pick ` + (this.state.active === i ? 'picked' : '')} onClick={() => this.addActiveClass(i)} key={i}>
-                         <img src={`images/handle/`+item.img+`.jpg`} alt={item.name} width="80%"/>
-                         <p className={ `pick-name ` + ( item.price ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
+                    <div className={`col-md-4 col-12 form-pick ` + (this.state.active === i ? 'picked' : '')} onClick={() => this.addActiveClass(i)} key={i}>
+                        <Image
+                            src={`images/handle/`+item.img+'.jpg'}
+                            webp={`images/handle/`+item.img+'.webp'}
+                            style={{'width': '60%'}}
+                        />
+                        <p className={ `pick-name ` + ( item.price ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>
                      </div>
                     ))}
                     <div className="col-md-3"></div>

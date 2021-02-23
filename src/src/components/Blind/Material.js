@@ -41,7 +41,7 @@ export class Material extends React.Component {
                         <div className={ "m-2 p-2 form-pick " + (this.state.active === i ? 'picked' : '')}>
                             <Image
                                 src={`images/material/`+item.img+'.png'}
-                                webp={`images/material/`+item.img+'.webp'}
+                                webp={`images/material/`+item.img+'.png'}
                             />
                         </div>
                         <p className={ `pick-name ` + ( item.price > 0 ? 'charge' : '' )} data-charge={ `* dopłata ` + item.price + ` zł` }>{ item.name }</p>

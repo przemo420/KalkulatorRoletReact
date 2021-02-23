@@ -146,11 +146,13 @@ app.get('/', (req,res) => {
   res.sendFile(path.join(__dirname, 'public_nodejs/index.html'));
 });
 
-const webp = require('webp-converter');
+/*const webp = require('webp-converter');
 const convertPath = '../src/public/images/';
 
 convertFolderToWebp( 'color' );
 convertFolderToWebp( 'material' );
+convertFolderToWebp( 'handle' );
+convertFolderToWebp( '.' );
 
 function convertFolderToWebp( folderName ) {
     let fullPath = convertPath + folderName + '/';
@@ -167,7 +169,7 @@ function convertFolderToWebp( folderName ) {
             console.log(response);
         });
     }); 
-}
+}*/
 
 function parseErrorPostMessage( msg ) {
     return { 'success': false, 'msg': msg };
