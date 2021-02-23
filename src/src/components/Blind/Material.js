@@ -12,10 +12,8 @@ export class Material extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props.config;
 
-        if( this.state.active == null ) {
-            console.log( 'componentDidUpdate Material' );
-            this.setState({ handleType: prop.mat, active: 0 });
-            this.sendUpdate( 0 );
+        if( this.state.handleType.length === 0 ) {
+            this.setState({ handleType: prop.mat });
         }
     }
 

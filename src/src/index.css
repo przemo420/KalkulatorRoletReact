@@ -200,4 +200,5 @@ p.lead {
 @media screen and (max-width: 768px) {
   body { overflow: auto }
   footer { display: none!important }
+  .overflow { margin-top: 15px }
 }

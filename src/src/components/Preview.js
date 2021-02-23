@@ -19,8 +19,6 @@ export class Preview extends React.Component {
         
         if( typeof prop.data === 'undefined' || previousProps === this.props) return;
 
-        console.log( 'Preview update', prop.data );
-
         this.setState({
             blinds: prop.data.blinds,
             fullPrice: (prop.data.fullPrice).toFixed(2),

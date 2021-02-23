@@ -11,11 +11,9 @@ export class Price extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props;
 
-        console.log( 'Price.js componentDidUpdate', prop );
         if( typeof prop.data === 'undefined' || prop.data.price === this.state.price ) return;
 
         this.setState({ price: prop.data.price, qty: prop.data.qty, allegro: prop.config.allegro });
-        console.log( 'componentDidUpdate Price', prop );
     }
 
     openAllegro( e ) {
@@ -44,8 +42,8 @@ export class Price extends React.Component {
                 </div>
             </div>
             <div className="row mt-4 justify-content-center"> 
-                <button className="btn btn-success col-5" onClick={(e) => this.addBlind(e)}>+ dodaj kolejną roletę</button> 
-                <button className="btn btn-light col-5 ms-md-auto" onClick={(e) => this.openAllegro(e)}>Przejdź do aukcji</button>
+                <button className="btn btn-success col-12 col-md-5" onClick={(e) => this.addBlind(e)}>+ dodaj kolejną roletę</button> 
+                <button className="btn btn-light col-12 col-md-5 ms-md-auto" onClick={(e) => this.openAllegro(e)}>Przejdź do aukcji</button>
             </div>
         </div>
         )

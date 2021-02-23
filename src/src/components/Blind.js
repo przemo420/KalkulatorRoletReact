@@ -15,7 +15,7 @@ class Blind extends React.Component {
         super(props);
 
         this.state = { startData: { 'load': false } };
-        this.formState = {};
+        this.formState = { 'installation': null, 'material': null, 'color': null };
         this.waitingForSend = { 'status': false, 'statusList': {} };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -39,7 +39,6 @@ class Blind extends React.Component {
     getStartConfig = () => {
       getStartConfig()
         .then( conf => {
-          console.log( 'startData loaded', conf );
           conf.load = true;
           
           this.setState({ startData: conf, configLoad: true });
@@ -48,6 +47,12 @@ class Blind extends React.Component {
 
     addBlind = () => {
         let tColor = this.state.startData.color[ this.formState.color ]; let state = JSON.parse(JSON.stringify(this.formState));
+
+        if( typeof this.state.priceData.price === 'undefined' || 
+            this.formState.color == null ||
+            this.formState.material == null ||
+            this.formState.installation == null ||
+            this.state.priceData.qty === 0 ) return;
 
         state.blindColor = tColor.name;
         state.price = this.state.priceData.price;
@@ -60,22 +65,23 @@ class Blind extends React.Component {
             price: this.state.priceData.price,
             qty: this.state.priceData.qty
         });
-        console.log( 'addBlind', state);
     }
 
     updateData = ( data ) => {
-        console.log( 'updateData', data );
         this.formState = Object.assign( this.formState, data );
         
         if( Object.keys( this.formState ).length < 5 ) return;
-        if( this.formState.width > this.state.startData.dim.width.max ||
-            this.formState.width < this.state.startData.dim.width.min ) return;
-        if( this.formState.height > this.state.startData.dim.height.max ||
-            this.formState.height < this.state.startData.dim.height.min ) return;
+
+        if ( ( this.formState.width > this.state.startData.dim.width.max ||
+            this.formState.width < this.state.startData.dim.width.min ) ||
+            ( this.formState.height > this.state.startData.dim.height.max ||
+            this.formState.height < this.state.startData.dim.height.min ) ) {
+                this.setState({ priceData: { price: '0.00', qty: '0' } });
+                return;
+            }
 
         this.waitingForSend.statusList = this.formState;
         
-        console.log( 'this.waitingForSend.status', this.waitingForSend.status);
         if( this.waitingForSend.status === true ) {
             console.log('BLok!');
             return;
@@ -93,8 +99,6 @@ class Blind extends React.Component {
     }
 
     updateForm = () => {
-        console.log( 'updateForm', this.waitingForSend.statusList);
-
         updateFormData( this.waitingForSend.statusList, 'calc' ).then( ret => {
             if( ret.success ) {
                 let priceData = { price: parseFloat(ret.price).toFixed(2), qty: ret.qty };
@@ -103,8 +107,6 @@ class Blind extends React.Component {
             }
 
             this.waitingForSend.status = false;
-
-            console.log( 'returnFormData', ret );
         }).catch(err => {
             this.waitingForSend.status = false;
         });
@@ -117,13 +119,9 @@ class Blind extends React.Component {
         event.preventDefault();
 
         let stringify = JSON.stringify( this.formState );
-        console.log( stringify );
         var state = JSON.parse( stringify );
-        console.log( state );
 
         this.props.handleSubmit( state );
-
-        
 
         event.preventDefault();
     }

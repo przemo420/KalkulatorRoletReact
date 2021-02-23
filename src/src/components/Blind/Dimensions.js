@@ -4,8 +4,8 @@ export default class Dimensions extends React.Component {
         super(props)
         
         this.state = { 
-            width: 0, 
-            height: 0, 
+            width: '', 
+            height: '', 
             h: '', 
             v: '', 
             msg: '',
@@ -26,9 +26,7 @@ export default class Dimensions extends React.Component {
     componentDidUpdate( previousProps, previousState ) {
         const prop = this.props.config;
 
-        if( this.state.width === 0 ) {
-            console.log( 'componentDidUpdate Dimensions' );
-
+        if( this.state.validate.width.min === 0 ) {
             this.setState({ 
                 validate: {
                     width: {
@@ -41,9 +39,7 @@ export default class Dimensions extends React.Component {
                         value: prop.dim.height.min,
                         max: prop.dim.height.max
                     }
-                },
-                width: prop.dim.width.min,
-                height: prop.dim.height.min
+                }
             });
 
             this.sendUpdate();
