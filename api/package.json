@@ -24,7 +24,8 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security",
     "http-proxy-middleware": "^1.0.4",
-    "nodemailer": "^6.4.17"
+    "nodemailer": "^6.4.17",
+    "webp-converter": "^2.3.3"
   },
   "devDependencies": {
     "del": "^5.1.0",
