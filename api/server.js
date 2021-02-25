@@ -136,7 +136,11 @@ app.post('/api/form-calc', (req, res) => {
         price = results[ nHeight ][ nWidth ];
     }
     
-    price = parseFloat( price.replace(',','.') ) + config.color[ body.color ].price + config.mat[ body.material ].price;
+    price = parseFloat( price.replace(',','.') ) 
+        + parseFloat( config.color[ body.color ].price )
+        + parseFloat( config.mat[ body.material ].price )
+        + parseFloat( config.ins[ body.installation ].price );
+
     qty = Math.ceil( price / config.pricePerQty );
 
     res.json({ 'success': true, 'price': price, 'qty': qty });
@@ -248,6 +252,7 @@ function loadConfigFile( fileName, cfgName='', csvConfig={} ) {
     }
 
     fsh.on('end', () => {
+        console.log( config );
         console.log( 'Załadowano plik ' + fileName + '.csv' );
     });
 }
