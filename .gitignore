@@ -2,6 +2,7 @@
 
 # compiled output
 /dist
+/api/app.js
 /src/build
 /tmp
 /out-tsc
