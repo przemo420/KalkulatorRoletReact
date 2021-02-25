@@ -1,4 +1,4 @@
-const prodUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/' : 'https://rolety.sztosit.eu/api/';
+const prodUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000/api/' : '/api/';
 
 export async function getStartConfig() {
     const response = await fetch( prodUrl + 'start' );
