@@ -47,6 +47,7 @@ class Blind extends React.Component {
 
     addBlind = () => {
         if( typeof this.state.priceData.price === 'undefined' || 
+            this.state.startData.load === false ||
             this.formState.color == null ||
             this.formState.material == null ||
             this.formState.installation == null ||
@@ -54,12 +55,12 @@ class Blind extends React.Component {
 
         let tStartData = this.state.startData,
             tColor = tStartData.color[ this.formState.color ],
-            tMaterial = tStartData.mat[ state.material ],
+            tMaterial = tStartData.mat[ this.formState.material ],
             state = JSON.parse(JSON.stringify(this.formState));
 
         state.blindColor = tColor.name;
+        state.blindMaterial = tMaterial.name;
         state.price = this.state.priceData.price;
-        state.blindMaterial = tMaterial[ state.material ].name;
 
         this.formState.blindImage = tColor.image;
 
